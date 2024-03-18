@@ -6,6 +6,7 @@ export default {
             userStatistics: [],  // 從路由中獲取的使用者統計數據
             currentPage: 1,
             itemsPerPage: 10,
+            hoveredIndex: -1, // 追蹤當前懸停的行索引
         }
     },
     components: {
@@ -73,6 +74,11 @@ export default {
             });
         },
 
+        // 設置懸停的行索引
+        setHoveredIndex(index) {
+            this.hoveredIndex = index;
+        },
+
     },
 
     mounted() {
@@ -104,7 +110,7 @@ export default {
 <template>
     <div class="bgArea">
         <!-- <p>{{ userStatistics }}</p> -->
-        <moveToPrevious/>
+        <moveToPrevious />
         <table>
             <tr>
                 <th>姓名</th>
@@ -114,11 +120,18 @@ export default {
                 <th>作答紀錄</th>
             </tr>
             <tr v-for="(user, index) in paginatedUserStatistics" :key="index">
-                <td>{{ user[0].name }}</td>
-                <td>{{ user[0].email }}</td>
-                <td>{{ user[0].phoneNumber }}</td>
-                <td>{{ user[0].dateTime }}</td>
-                <td><i class="fa-solid fa-right-to-bracket" @click="goToAnswerRecord(user)"></i></td>
+                <td @mouseenter="setHoveredIndex(index)" @mouseleave="setHoveredIndex(-1)"
+                    :style="{ 'background-color': index === hoveredIndex ? '#eee8e2' : '' }">{{ user[0].name }}</td>
+                <td @mouseenter="setHoveredIndex(index)" @mouseleave="setHoveredIndex(-1)"
+                    :style="{ 'background-color': index === hoveredIndex ? '#eee8e2' : '' }">{{ user[0].email }}</td>
+                <td @mouseenter="setHoveredIndex(index)" @mouseleave="setHoveredIndex(-1)"
+                    :style="{ 'background-color': index === hoveredIndex ? '#eee8e2' : '' }">{{ user[0].phoneNumber }}
+                </td>
+                <td @mouseenter="setHoveredIndex(index)" @mouseleave="setHoveredIndex(-1)"
+                    :style="{ 'background-color': index === hoveredIndex ? '#eee8e2' : '' }">{{ user[0].dateTime }}</td>
+                <td @mouseenter="setHoveredIndex(index)" @mouseleave="setHoveredIndex(-1)"
+                    :style="{ 'background-color': index === hoveredIndex ? '#eee8e2' : '' }"><i
+                        class="fa-solid fa-right-to-bracket" @click="goToAnswerRecord(user)"></i></td>
             </tr>
         </table>
 
@@ -186,7 +199,7 @@ $maincolor: #A4804C;
             color: $maincolor;
 
             &:hover {
-                color: #DBD3A4;
+                color: #e3c416;
                 cursor: pointer;
             }
         }

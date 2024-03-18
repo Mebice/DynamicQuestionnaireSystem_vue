@@ -394,7 +394,7 @@ $maincolor: #3F6148;
 
     &:hover {
       cursor: pointer;
-      color: #d0c68d;
+      color: #c7b862;
     }
 
   }
@@ -405,7 +405,7 @@ $maincolor: #3F6148;
 
     &:hover {
       cursor: pointer;
-      color: #d0c68d;
+      color: #c7b862;
     }
   }
 
